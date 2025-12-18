@@ -1,127 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Business Dashboard</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background: #2f80ed;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    .container {
-      max-width: 800px;
-      margin: 30px auto;
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    h2 {
-      color: #333;
-    }
-    .workflow {
-      margin-bottom: 30px;
-      padding: 15px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-    }
-    button {
-      padding: 10px 20px;
-      background: #2f80ed;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    button:hover {
-      background: #1366d6;
-    }
-    input {
-      padding: 8px;
-      width: 70%;
-      margin-right: 10px;
-    }
-  </style>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FinAuto - B2B Finance Automation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            colors: {
+              primary: {
+                50: '#eff6ff',
+                100: '#dbeafe',
+                500: '#3b82f6',
+                600: '#2563eb',
+                700: '#1d4ed8',
+                900: '#1e3a8a',
+              }
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #f8fafc;
+      }
+      /* Custom scrollbar for chat */
+      .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+      }
+      .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.10.1",
+    "recharts": "https://esm.sh/recharts@^3.6.0",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.561.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
 </head>
-<body>
-  <header>
-    <h1>Small Business Dashboard</h1>
-  </header>
-  <div class="container">
-
-    <!-- Payroll & Attendance -->
-    <div class="workflow">
-      <h2>Payroll & Attendance</h2>
-      <input type="date" id="payrollDate" />
-      <button onclick="runPayroll()">Run Payroll</button>
-    </div>
-
-    <!-- Purchase Invoice WhatsApp AI -->
-    <div class="workflow">
-      <h2>Purchase Invoice WhatsApp AI</h2>
-      <input type="text" id="invoiceId" placeholder="Enter Invoice ID" />
-      <button onclick="sendInvoice()">Send Invoice</button>
-    </div>
-
-    <!-- Delivery Tracking -->
-    <div class="workflow">
-      <h2>Delivery Tracking</h2>
-      <input type="text" id="orderId" placeholder="Enter Order ID" />
-      <button onclick="trackDelivery()">Track Delivery</button>
-    </div>
-
-  </div>
-
-  <script>
-    // Replace the URLs with your workflow URLs
-    const payrollURL = "YOUR_PAYROLL_WORKFLOW_URL";
-    const invoiceURL = "YOUR_INVOICE_WORKFLOW_URL";
-    const deliveryURL = "YOUR_DELIVERY_WORKFLOW_URL";
-
-    function runPayroll() {
-      const date = document.getElementById("payrollDate").value;
-      fetch(payrollURL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ date: date })
-      })
-      .then(res => res.json())
-      .then(data => alert("Payroll Status: " + (data.status || "Done")))
-      .catch(err => alert("Error: " + err));
-    }
-
-    function sendInvoice() {
-      const invoice = document.getElementById("invoiceId").value;
-      fetch(invoiceURL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ invoiceId: invoice })
-      })
-      .then(res => res.json())
-      .then(data => alert("Invoice Status: " + (data.status || "Sent")))
-      .catch(err => alert("Error: " + err));
-    }
-
-    function trackDelivery() {
-      const order = document.getElementById("orderId").value;
-      fetch(deliveryURL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ orderId: order })
-      })
-      .then(res => res.json())
-      .then(data => alert("Delivery Status: " + (data.status || "Tracked")))
-      .catch(err => alert("Error: " + err));
-    }
-  </script>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
 </body>
 </html>
